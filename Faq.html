@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - CryptoSwift</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .faq-container {
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-container h2 {
+            font-size: 2.5em;
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e1e1e1;
+            padding: 10px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #007bff;
+            cursor: pointer;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #0056b3;
+            background-color: #e7f1ff;
+            border-radius: 5px;
+        }
+
+        .faq-answer {
+            display: none;
+            font-size: 1em;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation for FAQ toggle */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .faq-answer.show {
+            animation: fadeIn 0.5s ease-out;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CryptoSwift - Frequently Asked Questions</h1>
+</header>
+
+<div class="faq-container">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            What is CryptoSwift?
+        </div>
+        <div class="faq-answer">
+            CryptoSwift is a cryptocurrency exchange platform where users can buy, sell, and store cryptocurrencies such as Bitcoin, USDT, and more.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            How do I register on CryptoSwift?
+        </div>
+        <div class="faq-answer">
+            To register, click the "Register" button on the homepage, fill in your details, including your email, password, and date of birth. You will also receive an email to verify your account.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            How do I buy cryptocurrencies on CryptoSwift?
+        </div>
+        <div class="faq-answer">
+            To buy cryptocurrency, go to the "Buy" page. You can send USDT (TRC20 or BEP20) to our provided wallet address, and your account will be credited with the cryptocurrency.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            How do I sell my cryptocurrency on CryptoSwift?
+        </div>
+        <div class="faq-answer">
+            To sell cryptocurrency, go to the "Sell" page. Send your cryptocurrency to the provided wallet address, and you will receive your payment directly to your bank account after the transaction is confirmed.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            What are the transaction fees on CryptoSwift?
+        </div>
+        <div class="faq-answer">
+            The transaction fees depend on the network used for sending cryptocurrencies. For example, sending USDT via TRC20 network usually has a lower fee than the BEP20 network.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            Is CryptoSwift secure?
+        </div>
+        <div class="faq-answer">
+            Yes, CryptoSwift uses state-of-the-art encryption methods to secure your data and funds. We also recommend enabling two-factor authentication (2FA) for added security.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            How do I contact support?
+        </div>
+        <div class="faq-answer">
+            You can reach our support team by visiting the "Contact" page or emailing us at support@cryptoswift.com for assistance.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">
+            How can I withdraw funds from CryptoSwift?
+        </div>
+        <div class="faq-answer">
+            To withdraw funds, first sell your cryptocurrency. After the transaction is complete, you can request a withdrawal to your bank account directly through our platform.
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 CryptoSwift. All Rights Reserved. | <a href="contact.html">Contact Us</a> | <a href="faq.html">FAQ</a></p>
+</footer>
+
+<script>
+    // Toggle FAQ answers
+    const faqItems = document.querySelectorAll('.faq-question');
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.nextElementSibling;
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.classList.add('show');
+                answer.style.display = 'block';
+            } else {
+                answer.classList.remove('show');
+                answer.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

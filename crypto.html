@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CryptoSwift - Buy & Sell Crypto Instantly</title>
+  <style>
+    @keyframes scrollTicker {
+      0% { transform: translateY(100%); opacity: 0; }
+      10% { transform: translateY(0); opacity: 1; }
+      90% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100%); opacity: 0; }
+    }
+
+    .ticker {
+      background-color: #161b22;
+      color: #58a6ff;
+      height: 30px;
+      overflow: hidden;
+      position: relative;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .ticker-message {
+      position: absolute;
+      width: 100%;
+      animation: scrollTicker 5s linear infinite;
+    }
+  </style>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background-color: #0d1117; color: white;">
+
+  <!-- HEADER -->
+  <header style="padding: 20px; background-color: #161b22; display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="margin: 0; font-size: 24px;">CryptoSwift</h1>
+    <nav>
+      <a href="buy.html" style="color: #58a6ff; margin-right: 15px; text-decoration: none;">Buy</a>
+      <a href="sell.html" style="color: #58a6ff; margin-right: 15px; text-decoration: none;">Sell</a>
+      <a href="#contact" style="color: #58a6ff; text-decoration: none;">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section style="padding: 80px 20px; text-align: center;">
+    <h2 style="font-size: 36px; margin-bottom: 20px;">Buy & Sell Crypto Instantly</h2>
+    <p style="font-size: 18px; margin-bottom: 30px;">We offer fast and secure trading for Bitcoin, Ethereum, USDT, and more.</p>
+    <a href="buy.html" style="padding: 12px 24px; background-color: #238636; color: white; text-decoration: none; margin-right: 10px; border-radius: 6px;">Buy Now</a>
+    <a href="sell.html" style="padding: 12px 24px; background-color: #da3633; color: white; text-decoration: none; border-radius: 6px;">Sell Now</a>
+  </section>
+
+  <!-- LIVE TRANSACTION TICKER -->
+  <footer class="ticker">
+    <div id="liveTicker" class="ticker-message">Loading live transactions...</div>
+  </footer>
+
+  <!-- Ticker Script -->
+  <script>
+    const names = [
+      "Olumide from Nigeria", "Sarah from South Africa", "Jean-Luc from France", "Takashi from Japan", "Maria from Spain",
+      "David from USA", "Nneka from Nigeria", "Ahmed from Egypt", "Priya from India", "Sergio from Brazil",
+      "William from Canada", "Zhang Wei from China", "Elena from Italy", "Mohammed from UAE", "Clara from Germany",
+      "Chinedu from Nigeria", "Chloe from UK", "Jamal from Morocco", "Ava from Australia", "Andile from South Africa",
+      "Hassan from Kenya", "Kai from South Korea", "Carlos from Mexico", "Natalia from Russia", "Mikel from Turkey",
+      "Bongani from Zimbabwe", "Angela from Greece", "Samuel from Ghana", "Isabella from Portugal", "Youssef from Algeria",
+      "Zanele from South Africa", "Blessing from Nigeria", "Emmanuel from Cameroon", "Fatima from Pakistan", "Ivan from Ukraine",
+      "Susan from USA", "Adama from Senegal", "Helena from Argentina", "Musa from Sudan", "Kwame from Ghana",
+      "Josef from Austria", "Leila from Tunisia", "Kelvin from Malawi", "Dorothy from Liberia", "Santiago from Colombia",
+      "Mila from Croatia", "Collins from Kenya", "Julia from Poland", "Pablo from Chile"
+    ];
+
+    const actions = ["bought", "sold", "withdrew"];
+    const coins = ["$700 BTC", "$1,000 USDT", "$500 ETH", "$1,200 TRX", "$2,000 BTC", "$850 USDT"];
+
+    const ticker = document.getElementById("liveTicker");
+
+    function updateTicker() {
+      const name = names[Math.floor(Math.random() * names.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const coin = coins[Math.floor(Math.random() * coins.length)];
+      ticker.textContent = `${name} ${action} ${coin}`;
+    }
+
+    // Initial load
+    updateTicker();
+    // Update every 5 seconds
+    setInterval(updateTicker, 5000);
+  </script><br><br><hr>
+
+
+<div class="crypto-prices">
+    <h3>Live Cryptocurrency Prices</h3>
+    <ul id="crypto-list">
+        <!-- Crypto items will be added here -->
+    </ul>
+</div>
+
+<script>
+    const cryptos = [
+        "Bitcoin", "Ethereum", "Tether", "Litecoin", "Ripple",
+        "Bitcoin Cash", "Cardano", "Polkadot", "Dogecoin", "Chainlink",
+        "Binance Coin", "Solana", "Avalanche", "Shiba Inu", "VeChain",
+        "Polygon", "Uniswap", "Fantom", "Terra", "Theta",
+        "Algorand", "EOS", "TRON", "Zcash", "Stellar", "Filecoin",
+        "Cosmos", "Tezos", "Aave", "SushiSwap", "Curve DAO Token"
+    ];
+
+    function generatePriceChange() {
+        return (Math.random() * 10 - 5).toFixed(2); // Random change between -5 and 5
+    }
+
+    function updateCryptoPrices() {
+        const cryptoList = document.getElementById('crypto-list');
+        cryptoList.innerHTML = '';
+
+        cryptos.forEach(crypto => {
+            const priceChange = generatePriceChange();
+            const isUp = priceChange > 0;
+
+            const listItem = document.createElement('li');
+            listItem.classList.add('crypto-item');
+
+            const cryptoName = document.createElement('span');
+            cryptoName.classList.add('crypto-name');
+            cryptoName.textContent = crypto;
+
+            const cryptoValue = document.createElement('span');
+            cryptoValue.classList.add('crypto-value');
+            cryptoValue.classList.add(isUp ? 'up' : 'down');
+            cryptoValue.textContent = `$${(Math.random() * 50000).toFixed(2)} ${isUp ? '+' : ''}${priceChange}`;
+
+            listItem.appendChild(cryptoName);
+            listItem.appendChild(cryptoValue);
+
+            cryptoList.appendChild(listItem);
+        });
+    }
+
+    updateCryptoPrices();
+
+    setInterval(updateCryptoPrices, 3000);
+</script>
+
+<style>
+    .crypto-prices {
+        width: 80%;
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .crypto-prices h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+
+    #crypto-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .crypto-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+    }
+
+    .crypto-item:hover {
+        background-color: #f1f1f1;
+    }
+
+    .crypto-name {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .crypto-value {
+        font-weight: bold;
+    }
+
+    .up {
+        color: green;
+    }
+
+    .down {
+        color: red;
+    }
+</style>
+
+</body>
+</html>

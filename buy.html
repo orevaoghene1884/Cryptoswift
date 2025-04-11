@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Cryptocurrency | CryptoSwift</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        header {
+            background-color: #000;
+            color: #ff4081;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #1c1c1c;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            font-size: 28px;
+            color: #ff4081;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Crypto Wallet Balance Section */
+        .crypto-wallet-balance {
+            background-color: #333;
+            padding: 20px;
+            color: white;
+            font-size: 22px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .crypto-wallet-balance strong {
+            font-size: 24px;
+            color: #ff4081;
+        }
+
+        /* Crypto Addresses Section */
+        .crypto-addresses {
+            background-color: #222;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .crypto-addresses h3 {
+            font-size: 26px;
+            color: #ff4081;
+            margin-bottom: 15px;
+        }
+
+        .crypto-addresses ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .crypto-addresses li {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .buy-now {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .buy-button {
+            background-color: #ff4081;
+            color: white;
+            font-size: 20px;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .buy-button:hover {
+            background-color: #e040fb;
+        }
+
+        .exchanges {
+            margin-top: 40px;
+        }
+
+        .exchanges h3 {
+            font-size: 26px;
+            color: #ff4081;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .exchanges ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .exchanges li {
+            font-size: 18px;
+            background-color: #444;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .exchanges li a {
+            color: #ff4081;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #000;
+            color: white;
+            margin-top: 30px;
+            border-radius: 10px;
+            width: 90%;
+            margin: 40px auto;
+        }
+
+        .footer a {
+            color: #ff4081;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Buy Cryptocurrency</h1>
+    </header>
+
+    <div class="container">
+        <!-- Wallet Balance Section -->
+        <div class="crypto-wallet-balance">
+            <p>Crypto Wallet Balance: <strong>$0</strong></p>
+            <p>Please send cryptocurrency to the address below to buy:</p>
+        </div>
+
+        <!-- Crypto Addresses Section -->
+        <div class="crypto-addresses">
+            <h3>Your Personal Cryptocurrency Wallet Addresses</h3>
+            <ul>
+                <li><strong>USDT BEP20 Address:</strong> <span id="usdt-bep20">Your Address Here</span></li>
+                <li><strong>USDT TRC20 Address:</strong> <span id="usdt-trc20">Your Address Here</span></li>
+                <li><strong>Bitcoin Address:</strong> <span id="btc-address">Your Address Here</span></li>
+            </ul>
+        </div>
+
+        <!-- Buy Confirmation Section -->
+        <div class="buy-now">
+            <h2>For now, we only sell cryptocurrency, and you will get paid directly to your account.</h2>
+            <p>Please send your payments to the above crypto addresses and confirm once the transaction is complete.</p>
+            <button class="buy-button" onclick="window.location.href='sell.html'">Confirm Buy</button>
+        </div>
+
+        <!-- Cryptocurrency Exchanges List -->
+        <div class="exchanges">
+            <h3>Where to Buy Cryptocurrency</h3>
+            <ul>
+                <li><a href="https://www.binance.com" target="_blank">Binance</a></li>
+                <li><a href="https://www.coinbase.com" target="_blank">Coinbase</a></li>
+                <li><a href="https://www.kraken.com" target="_blank">Kraken</a></li>
+                <li><a href="https://www.bitstamp.net" target="_blank">Bitstamp</a></li>
+                <li><a href="https://www.binance.us" target="_blank">Binance US</a></li>
+                <li><a href="https://www.trustwallet.com" target="_blank">Trust Wallet</a></li>
+                <li><a href="https://www.luno.com" target="_blank">Luno</a></li>
+                <li><a href="https://www.changenow.io" target="_blank">ChangeNOW</a></li>
+                <li><a href="https://chagelly.com" target="_blank">Chagelly</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 CryptoSwift. <a href="faq.html">FAQ</a> | <a href="contact.html">Contact Us</a></p>
+    </div>
+
+    <script>
+        // Simulating dynamic wallet address generation
+        function generateWalletAddresses() {
+            // These would be dynamically generated for each user in a real-world scenario.
+            document.getElementById('usdt-bep20').innerText = '0x272691b6300a719fd1d8e7524f4c28fade078243'; // Example BEP20 address
+            document.getElementById('usdt-trc20').innerText = 'TVQozc5MZXHzroRGG8EqAWDT6U5DYbRErT'; // Example TRC20 address
+            document.getElementById('btc-address').innerText = '3BfoU2qv6ytuAb6XFQGxwUBUJETaV75hEi'; // Example BTC address
+        }
+
+        window.onload = generateWalletAddresses;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register - CryptoSwift</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      color: #4fc3f7;
+    }
+    form {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      background-color: #2c2c2c;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4fc3f7;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .code-box {
+      background: #2c2c2c;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 18px;
+      color: #4fc3f7;
+      margin: 10px 0;
+    }
+    p {
+      text-align: center;
+      margin-top: 10px;
+    }
+    a {
+      color: #4fc3f7;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Create Account</h2>
+  <form onsubmit="return validateRegister()">
+    <input type="text" id="fullname" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="email" id="confirmEmail" placeholder="Confirm Email" required>
+    <input type="date" id="dob" placeholder="Date of Birth" required>
+    <input type="password" id="password" placeholder="Password" minlength="6" required>
+    <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+
+    <div class="code-box" id="register-code">Code: 000000</div>
+    <input type="text" id="register-verification" placeholder="Enter Code Above" required>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p>Already registered? <a href="login.html">Login here</a></p>
+
+  <script>
+    function generateRegisterCode() {
+      const code = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById("register-code").textContent = "Code: " + code;
+      return code;
+    }
+
+    let currentRegisterCode = generateRegisterCode();
+    setInterval(() => currentRegisterCode = generateRegisterCode(), 15000);
+
+    function validateRegister() {
+      const email = document.getElementById("email").value;
+      const confirmEmail = document.getElementById("confirmEmail").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+      const inputCode = document.getElementById("register-verification").value;
+
+      if (email !== confirmEmail) {
+        alert("Email addresses do not match.");
+        return false;
+      }
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+      if (parseInt(inputCode) !== currentRegisterCode) {
+        alert("Invalid verification code.");
+        return false;
+      }
+
+      // Redirect to crypto.html
+      window.location.href = "crypto.html";
+      return false; // prevent form submission default
+    }
+  </script>
+
+</body>
+</html>
